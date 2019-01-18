@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Games</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="D:/com/cs494/vue-Lab2"></script>
+
+</head>
+
+<body>
+    <div id="game">
+        <button v-on:click="starts">Start</button><br><br>
+        Monster: {{healthMo}} Player: {{healthPl}}
+        <br><br>
+        <img src="D:/com/cs494/vue-Lab2/16.png" :width="healthMo" :height="healthMo">
+        <img src="D:/com/cs494/vue-Lab2/17.png" :width="healthPl" :height="healthPl"><br><br>
+        <button v-on:click="randomA">Attack</button>
+        <button v-on:click="randomS">Special Attack</button>
+    </div>
+
+</body>
+
+</html>
+<script>
+    var Game = new Vue({
+        el: '#game',
+        data: {
+            healthMo: 0,
+            healthPl: 0,
+            text: 'You win!!!'
+        },
+        methods: {
+            starts: function () {
+                this.healthMo = 100;
+                this.healthPl = 100;
+            },
+            randomA: function () {
+                minM = 3, maxM = 10;
+                minP = 5, maxP = 15;
+                this.healthMo = this.healthMo - Math.max(Math.floor(Math.random() * maxM) + 1, minM);
+                this.healthPl = this.healthPl - Math.max(Math.floor(Math.random() * maxP) + 1, minP);
+                if (this.healthMo <= 0) {
+                    this.healthMo = 0;
+                    this.healthPl = this.text;
+                    if (this.healthPl <= 0) {
+                        this.healthPl = 0;
+                        this.healthMo = this.text;
+                    }
+                }
+                if (this.healthPl <= 0) {
+                    this.healthPl = 0;
+                    this.healthMo = this.text;
+                    if (this.healthMo <= 0) {
+                        this.healthMo = 0;
+                        this.healthPl = this.text;
+                    }
+                }
+
+            },
+            randomS: function () {
+                minM = 10, maxM = 20;
+                minP = 5, maxP = 15;
+                this.healthMo = this.healthMo - Math.max(Math.floor(Math.random() * maxM) + 1, minM);
+                this.healthPl = this.healthPl - Math.max(Math.floor(Math.random() * maxP) + 1, minP);
+                if (this.healthMo <= 0) {
+                    this.healthMo = 0;
+                    this.healthPl = this.text;
+                    if (this.healthPl <= 0) {
+                        this.healthPl = 0;
+                        this.healthMo = this.text;
+                    }
+                }
+                if (this.healthPl <= 0) {
+                    this.healthPl = 0;
+                    this.healthMo = this.text;
+                    if (this.healthMo <= 0) {
+                        this.healthMo = 0;
+                        this.healthPl = this.text;
+                    }
+                }
+            },
+
+        },
+
+    })
+</script>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Lab3</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <span class="navbar-toggler-icon"></span>
+    <div id="lab3">
+        <div v-for="Name in tweets">
+            <main role="main" class="container">
+                <div class="jumbotron">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <img class="rounded-circle" :src="Name.img" width="140" height="140">
+                            </div>
+                            <div class="col-10">
+                                <h1>{{Name.name}} {{Name.handle}}</h1>
+                                <p class="lead">{{Name.tweet}}</p>
+                                <button v-on:click="Name.likes += 1"><img src="D:/com/cs494/vue-Lab2/7.png" width="50"
+                                        height="50">{{Name.likes}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script>
+    var Lab3 = new Vue({
+        el: "#lab3",
+        data: {
+            tweets: [{
+                    id: 1,
+                    name: 'James',
+                    handle: '@jokerjames',
+                    img: 'https://semantic-ui.com/images/avatar2/large/matthew.png',
+                    tweet: "If you don't succeed, dust yourself off and try again.",
+                    likes: 10,
+                },
+                {
+                    id: 2,
+                    name: 'Fatima',
+                    handle: '@fantasticfatima',
+                    img: 'https://semantic-ui.com/images/avatar2/large/molly.png',
+                    tweet: 'Better late than never but never late is better.',
+                    likes: 12,
+                },
+                {
+                    id: 3,
+                    name: 'Xin',
+                    handle: '@xeroxin',
+                    img: 'https://semantic-ui.com/images/avatar2/large/elyse.png',
+                    tweet: 'Beauty in the struggle, ugliness in the success.',
+                    likes: 18,
+                }
+            ]
+        },
+        methods: {
+            iconLike: function () {
+                if (condition) {
+                    this.likes = this.likes + 1;
+                }
+                
+            }
+
+        }
+    })
+</script>

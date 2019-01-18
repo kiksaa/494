@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Faculty</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="vue.min.js"></script> -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 25px; 
+        }
+        th {
+            text-align: center;
+            background-color: rgb(28, 185, 14);
+        }
+    </style>
+
+</head>
+
+<body>
+    <span class="navbar-toggler-icon"></span>
+    <div id="maejo">
+        <main role="main" class="container">
+            <div class="jumbotron">
+                <div class="container">
+                    <div class="block">
+                        <h3 class="block-title"><span>{{heading}}</span></h3>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="faculty">เลือกคณะ / Faculty</label>
+                            <select class="form-control" name="faculty" id="faculty" v-model="faculty">
+                                <option :value="null" disabled selected>select faculty</option>
+                                <option v-for="option in faculty_options" v-bind:value="option.id">{{option.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <center>
+            <table style="width:100%" for="faculty" name="major" id="major" v-model="major" cellspacing="0" border="1">
+                <thead>
+                    <tr>
+                        <th><b>รหัสหลักสูตร</b></th>
+                        <th><b>รายชื่อหลักสูตร</b></th>
+                        <th><b>หลักสูตร(ปี)</b></th>
+                    </tr>
+                    <tr v-for="option in major_options[faculty]" v-bind:value="option.id">
+                        <td>{{option.code}}</td>
+                        <td>{{option.name}}<p>{{option.eng}}</p>
+                        </td>
+                        <td>{{option.years}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </center>
+        </main>
+    </div>
+</body>
+
+</html>
+<script>
+    var Lab3_2 = new Vue({
+        el: '#maejo',
+        data: {
+            heading: 'หลักสูตรที่เปิดสอน',
+            faculty: null,
+            major: null,
+            faculty_options: [{
+                    name: 'สารสนเทศและการสื่อสาร',
+                    id: "DC"
+                },
+                {
+                    name: 'วิทยาลัยบริหารศาสตร์',
+                    id: "SAS"
+                },
+                {
+                    name: 'ศิลปศาตร์',
+                    id: "BA"
+                }
+            ],
+            major_options: {
+                DC: [{
+                        id: 1,
+                        code: "56318010",
+                        name: "การสื่อสารดิจิทัล",
+                        eng: "Bachelor of Arts Program in Digital Communication",
+                        years: "4"
+                    },
+                    {
+                        id: 2,
+                        code: "521224",
+                        name: "การสื่อสารดิจิทัล",
+                        eng: "Bachelor of Arts Program in Digital Communication",
+                        years: "4"
+                    }
+                ],
+
+                SAS: [{
+                        id: 1,
+                        code: "60305040",
+                        name: "รัฐประศาสนศาสตร์",
+                        eng: "Public Administration",
+                        years: "4"
+                    },
+                    {
+                        id: 2,
+                        code: "56305010",
+                        name: "รัฐศาสตร์",
+                        eng: "Political Science",
+                        years: "4"
+                    },
+                    {
+                        id: 3,
+                        code: "56305030",
+                        name: "การบริหารท้องถิ่น",
+                        eng: "Local Administration",
+                        years: "4"
+
+                    }
+                ],
+
+                BA: [{
+                        id: 1,
+                        code: "60314010",
+                        name: "ภาษาอังกฤษ",
+                        eng: "English",
+                        years: "4"
+                    },
+                    {
+                        id: 2,
+                        code: "56314020",
+                        name: "นิเทศศาสตร์บูรณาการ",
+                        eng: "Bachelor of Arts Program in Integrated Communication",
+                        years: "4"
+                    },
+                    {
+                        id: 3,
+                        code: "55314010",
+                        name: "ภาษาอังกฤษ",
+                        eng: "Bachelor of Arts Program in English",
+                        years: "4"
+                    },
+                    {
+                        id: 4,
+                        code: "482149",
+                        name: "นิเทศศาสตร์บูรณาการ",
+                        eng: "Bachelor of Arts Program in Integrated Communication",
+                        years: "4"
+                    }
+                ]
+            }
+        },
+    });
+</script>

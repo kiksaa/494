@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  
+</head>
+<body>
+    <div id="lab">
+        <h1>{{msg}}</h1><br>
+        <input type="text" v-model.lazy ="msg">
+        <button v-bind:disabled = "isButtonDisabled">OK</button><br>
+        <button v-on:click="greet">Greet</button><br>
+        <h2><a :href="url">Cs Mju</a></h2><br>
+        {{studentCode}}<br>
+        {{name}}<br>
+        {{lastName}}<br>
+        {{major}}<br>
+        {{gpa}}<br>
+
+    </div>
+
+</body>
+</html>
+<script>
+    var lab2 = new Vue({
+        el:'#lab',
+        data:{
+            url:'http://csmju.jowave.com/',
+            isButtonDisabled: false,
+            msg: 'สวัสดีค่ะ :)',
+            studentCode: '5904101376',
+            name: 'Samatcha',
+            lastName: 'Daosungnoen',
+            major: 'Computer Science',
+            gpa:[3.41,3.25,3.43,3.28,3.65]
+        },
+        methods:{
+            greet:function(){
+                this.msg = this.msg + ' Maejo ' + this.studentCode;
+            }
+
+        },
+        computed:{
+
+        }
+    })
+</script>

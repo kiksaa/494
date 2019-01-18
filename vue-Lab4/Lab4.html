@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Icon</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body bgcolor ="gray">
+    <div id = "components">
+        <button-like title="like" @sum-click="totalClick"></button-like>
+        <button-like title="love" @sum-click="totalClick"></button-like>
+        <button-like title="smile" @sum-click="totalClick"></button-like>
+        <button-like title="angry" @sum-click="totalClick"></button-like>
+        <button-like title="cry" @sum-click="totalClick"></button-like>
+        <button-like title="wow" @sum-click="totalClick"></button-like>
+        <hr>
+        Total : {{total}}<br>
+        {{name}}
+    </div>
+    
+</body>
+</html>
+<script>
+    Vue.component(
+        'button-like',{
+            props:['title'],
+            data: function(){
+                return{
+                    count:0
+                }
+            },
+            template:'<button v-on:click="countUp">{{ title }} {{ count }}</button>',
+            methods:{
+                countUp(){
+                    this.count++;
+                    this.$emit('sum-click',this.title);
+                }
+            }
+        }
+    )
+    new Vue({
+        el: "#components",
+        data:{
+            total:0,//เก็บจำนวนครั้ง
+            name:[],//เก็บชื่อ
+        },
+        methods:{
+            totalClick(n){
+                this.total++;
+                this.name.push(n)
+            }
+        }
+    })
+</script>

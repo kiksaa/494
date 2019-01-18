@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Icon</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="D:/com/cs494/vue-Lab2"></script>
+    <style>
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+         }
+            
+        .button2 {background-color: #008CBA;} /* Blue */
+        .button3 {background-color: #f44336;} /* Red */ 
+        .button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
+        .button5 {background-color: #555555;} /* Black */
+    </style>
+</head>
+<body bgcolor ="gray">
+    <div id = "lab2">
+        <button v-on:click="iconLike">{{like}}<img src = "D:/com/cs494/vue-Lab2/10.png"  width="50" height="50"></button>
+        <button v-on:click="iconLove">{{love}}<img src = "D:/com/cs494/vue-Lab2/7.png"  width="50" height="50"></button>
+        <button v-on:click="iconFun">{{fun}}<img src = "D:/com/cs494/vue-Lab2/8.png"  width="50" height="50"></button>
+        <button v-on:click="iconWow">{{wow}}<img src = "D:/com/cs494/vue-Lab2/9.png"  width="50" height="50"></button>
+        <button v-on:click="iconSad">{{sad}}<img src = "D:/com/cs494/vue-Lab2/13.jpg"  width="50" height="50"></button>
+        <button v-on:click="iconAngry">{{angry}}<img src = "D:/com/cs494/vue-Lab2/12.png"  width="50" height="50"></button>
+    </div>
+    <br>
+    <div id="game" align="center">
+        <button v-on:click="starts"class="button button2">Start</button><br><br>
+        Monster: {{healthMo}} Player: {{healthPl}}
+        <br><br>
+        <img src="D:/com/cs494/vue-Lab2/16.png" :width="healthMo" :height="healthMo">
+        <img src="D:/com/cs494/vue-Lab2/17.png" :width="healthPl" :height="healthPl"><br><br>
+        <button v-on:click="randomA" class="button">Attack</button>
+        <button v-on:click="randomS" class="button button3">Special Attack</button>
+    </div>
+    
+</body>
+</html>
+<script>
+    var Lab2 = new Vue({
+        el: "#lab2",
+        data:{
+            like:0,
+            love:0,
+            fun:0,
+            wow:0,
+            sad:0,
+            angry:0,
+        },
+        methods:{
+            iconLike:function() {
+                this.like = this.like +1;  
+            },
+            iconLove:function(){
+                this.love = this.love +1;
+            },
+            iconFun:function() {
+                this.fun = this.fun +1;  
+            },
+            iconWow:function(){
+                this.wow = this.wow +1;
+            },
+            iconSad:function() {
+                this.sad = this.sad +1;  
+            },
+            iconAngry:function(){
+                this.angry = this.angry +1;
+            }
+        }
+    })
+    var Game = new Vue({
+        el: '#game',
+        data: {
+            healthMo: 0,
+            healthPl: 0,
+            play: 'You win!!!',
+            monster: 'Monster win!!!',
+        },
+        methods: {
+            starts: function () {
+                this.healthMo = 100;
+                this.healthPl = 100;
+            },
+            randomA: function () {
+                minM = 3, maxM = 10;
+                minP = 5, maxP = 15;
+                this.healthMo = this.healthMo - Math.max(Math.floor(Math.random() * maxM) + 1, minM);
+                this.healthPl = this.healthPl - Math.max(Math.floor(Math.random() * maxP) + 1, minP);
+                if (this.healthMo <= 0) {
+                    this.healthMo = 0;
+                    this.healthPl = this.play;
+                    if (this.healthPl <= 0) {
+                        this.healthPl = 0;
+                        this.healthMo = this.monster;
+                    }
+                }
+                if (this.healthPl <= 0) {
+                    this.healthPl = 0;
+                    this.healthMo = this.monster;
+                    if (this.healthMo <= 0) {
+                        this.healthMo = 0;
+                        this.healthPl = this.play;
+                    }
+                }
+
+            },
+            randomS: function () {
+                minM = 10, maxM = 20;
+                minP = 5, maxP = 15;
+                this.healthMo = this.healthMo - Math.max(Math.floor(Math.random() * maxM) + 1, minM);
+                this.healthPl = this.healthPl - Math.max(Math.floor(Math.random() * maxP) + 1, minP);
+                if (this.healthMo <= 0) {
+                    this.healthMo = 0;
+                    this.healthPl = this.play;
+                    if (this.healthPl <= 0) {
+                        this.healthPl = 0;
+                        this.healthMo = this.monster;
+                    }
+                }
+                if (this.healthPl <= 0) {
+                    this.healthPl = 0;
+                    this.healthMo = this.monster;
+                    if (this.healthMo <= 0) {
+                        this.healthMo = 0;
+                        this.healthPl = this.play;
+                    }
+                }
+            },
+
+        },
+
+    })
+</script>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Homework</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <br>
+    <div id="todo-list-example">
+        <dd>
+            <select v-model="selected" id="selected" name="selected">
+                <option disabled value="">Please select one</option>
+                <option value="CS494">CS494</option>
+                <option value="CS442">CS442</option>
+                <option value="CS446">CS446</option>
+            </select>
+        </dd>
+        <p>
+            <form v-on:submit.prevent="addNewTodo">
+                <label for="new-todo">Add Homework</label>
+                <input v-model="newTodoText" id="new-todo" placeholder="หัวข้อการบ้าน">
+                <button>Add</button>
+            </form>
+            <ul>
+                <li is="todo-item" v-for="(todo, index) in todos" v-bind:key="todo.id" v-bind:title="todo.title"
+                    v-bind:sub="todo.sub" v-on:remove="todos.splice(index, 1)"></li>  <!-- เลข1ไม่มีเลยก็ได้ และหมายความว่าเพิ่มหรือลบข้อมูลก็ได้-->
+            </ul>
+    </div>
+
+</body>
+
+</html>
+<script>
+    Vue.component('todo-item', {
+        template: '\<li>\ {{sub}} : {{ title }} \ <button v-on:click="$emit(\'remove\')">Remove</button>\</li>\
+',
+        props: ['title', 'sub']
+    })
+
+    new Vue({
+        el: '#todo-list-example',
+        data: {
+            selected: '',
+            newTodoText: '',
+            todos: [
+                // {
+                //     id: 1,
+                //     title: 'Do the dishes',
+                // },
+                // {
+                //     id: 2,
+                //     title: 'Take out the trash',
+                // },
+                // {
+                //     id: 3,
+                //     title: 'Mow the lawn'
+                // }
+            ],
+            nextTodoId: 4
+        },
+        methods: {
+            addNewTodo: function () {
+                this.todos.push({
+                    id: this.nextTodoId++,
+                    title: this.newTodoText,
+                    sub: this.selected
+                })
+                this.newTodoText = ''
+                this.sub = ''
+            }
+        }
+    })
+</script>
